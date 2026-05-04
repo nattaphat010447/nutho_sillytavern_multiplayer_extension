@@ -242,7 +242,3 @@
     pointer-events: none;
     user-select: none;
 }
-
-#chat .mes.mp_preview .mes_text::before {
-    content: "⏳ ";
-}
