@@ -8,8 +8,8 @@
     right: 16px;
     width: 230px;
     isolation: isolate;
-    background-color: #ffffff;
-    border: 1px solid #000000;
+    background-color: #000000;
+    border: 1px solid #ffffff;
     border-radius: 8px;
     padding: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
@@ -17,7 +17,7 @@
     display: none;
     flex-direction: column;
     gap: 8px;
-    color: #000000;
+    color: #ffffff;
     font-size: 0.9em;
 }
 
@@ -25,7 +25,7 @@
     margin: 0 0 8px 0;
     text-align: center;
     font-size: 1em;
-    color: #000000;
+    color: #ffffff;
 }
 
 /* Close button */
@@ -40,15 +40,15 @@
     font-weight: bold;
     background: transparent !important;
     border: none !important;
-    color: #000000;
+    color: #ffffff;
     opacity: 0.6;
     line-height: 1;
 }
 
 #mp-close-btn:hover {
     opacity: 1;
-    background: #000000 !important;
-    color: #ffffff !important;
+    background: #ffffff !important;
+    color: #000000 !important;
 }
 
 #mp-panel input,
@@ -58,9 +58,9 @@
     margin-bottom: 6px;
     padding: 6px 8px;
     box-sizing: border-box;
-    background: #ffffff;
-    color: #000000;
-    border: 1px solid #000000;
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
     border-radius: 4px;
     font-family: inherit;
     font-size: inherit;
@@ -77,8 +77,8 @@
 }
 
 #mp-panel button:hover {
-    background: #000000 !important;
-    color: #ffffff !important;
+    background: #ffffff !important;
+    color: #000000 !important;
     filter: none;
 }
 
@@ -89,7 +89,7 @@
 
 #mp-panel hr {
     border: 0;
-    border-top: 1px solid #000000;
+    border-top: 1px solid #ffffff;
     margin: 6px 0;
 }
 
@@ -102,8 +102,8 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 8px;
-    background: #ffffff;
-    border: 1px solid #000000;
+    background: #000000;
+    border: 1px solid #ffffff;
     padding: 4px 8px;
     border-radius: 4px;
     gap: 6px;
@@ -117,7 +117,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: #000000;
+    color: #ffffff;
 }
 
 #mp-room-code-box button {
@@ -133,11 +133,11 @@
    ============================================================ */
 
 #mp-players {
-    border: 1px solid #000000;
+    border: 1px solid #ffffff;
     border-radius: 4px;
     padding: 6px;
     margin-bottom: 6px;
-    background: #ffffff;
+    background: #000000;
     max-height: 120px;
     overflow-y: auto;
 }
@@ -147,7 +147,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 3px 0;
-    border-bottom: 1px solid #000000;
+    border-bottom: 1px solid #ffffff;
 }
 
 .mp-player-row:last-child {
@@ -160,10 +160,10 @@
     white-space: nowrap;
     flex: 1;
     margin-right: 6px;
-    color: #000000;
+    color: #ffffff;
 }
 
-.mp-status-ready  { color: #000000; font-weight: bold; flex-shrink: 0; }
+.mp-status-ready  { color: #ffffff; font-weight: bold; flex-shrink: 0; }
 .mp-status-waiting { color: #666666; flex-shrink: 0; }
 
 /* ============================================================
@@ -173,9 +173,9 @@
 #mp-status-bar {
     font-size: 0.8em;
     text-align: center;
-    color: #000000;
+    color: #ffffff;
     padding-top: 8px;
-    border-top: 1px solid #000000;
+    border-top: 1px solid #ffffff;
 }
 
 /* ============================================================
@@ -228,5 +228,5 @@
 }
 
 #mp-inline-text.mp-all-ready { color: #51cf66; font-weight: bold; }
-#mp-inline-text.mp-waiting   { color: #ffd43b; }
+#mp-inline-text.mp-waiting   { color: #ff6810; }
 #mp-inline-text.mp-bot       { color: #adb5bd; font-style: italic; }
