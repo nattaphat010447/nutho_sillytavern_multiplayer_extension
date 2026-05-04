@@ -1,0 +1,232 @@
+/* ============================================================
+   PANEL
+   ============================================================ */
+
+#mp-panel {
+    position: fixed;
+    top: 60px;
+    right: 16px;
+    width: 230px;
+    isolation: isolate;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    z-index: 9999;
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    color: #000000;
+    font-size: 0.9em;
+}
+
+#mp-panel h4 {
+    margin: 0 0 8px 0;
+    text-align: center;
+    font-size: 1em;
+    color: #000000;
+}
+
+/* Close button */
+#mp-close-btn {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    width: auto !important;
+    margin-bottom: 0 !important;
+    padding: 2px 7px !important;
+    font-size: 0.85em;
+    font-weight: bold;
+    background: transparent !important;
+    border: none !important;
+    color: #000000;
+    opacity: 0.6;
+    line-height: 1;
+}
+
+#mp-close-btn:hover {
+    opacity: 1;
+    background: #000000 !important;
+    color: #ffffff !important;
+}
+
+#mp-panel input,
+#mp-panel textarea,
+#mp-panel button {
+    width: 100%;
+    margin-bottom: 6px;
+    padding: 6px 8px;
+    box-sizing: border-box;
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+#mp-panel textarea {
+    resize: vertical;
+}
+
+#mp-panel button {
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.15s, color 0.15s;
+}
+
+#mp-panel button:hover {
+    background: #000000 !important;
+    color: #ffffff !important;
+    filter: none;
+}
+
+#mp-panel button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+#mp-panel hr {
+    border: 0;
+    border-top: 1px solid #000000;
+    margin: 6px 0;
+}
+
+/* ============================================================
+   ROOM CODE BOX
+   ============================================================ */
+
+#mp-room-code-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    background: #ffffff;
+    border: 1px solid #000000;
+    padding: 4px 8px;
+    border-radius: 4px;
+    gap: 6px;
+}
+
+#mp-room-code {
+    font-family: monospace;
+    font-weight: bold;
+    letter-spacing: 2px;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #000000;
+}
+
+#mp-room-code-box button {
+    width: auto;
+    margin-bottom: 0;
+    padding: 3px 8px;
+    font-size: 0.8em;
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   PLAYER LIST
+   ============================================================ */
+
+#mp-players {
+    border: 1px solid #000000;
+    border-radius: 4px;
+    padding: 6px;
+    margin-bottom: 6px;
+    background: #ffffff;
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+.mp-player-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 0;
+    border-bottom: 1px solid #000000;
+}
+
+.mp-player-row:last-child {
+    border-bottom: none;
+}
+
+.mp-player-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    margin-right: 6px;
+    color: #000000;
+}
+
+.mp-status-ready  { color: #000000; font-weight: bold; flex-shrink: 0; }
+.mp-status-waiting { color: #666666; flex-shrink: 0; }
+
+/* ============================================================
+   STATUS BAR
+   ============================================================ */
+
+#mp-status-bar {
+    font-size: 0.8em;
+    text-align: center;
+    color: #000000;
+    padding-top: 8px;
+    border-top: 1px solid #000000;
+}
+
+/* ============================================================
+   INTEGRATED READY BUTTON
+   ============================================================ */
+
+#mp-main-ready-btn {
+    cursor: pointer;
+    font-size: 1.1em;
+    margin-right: 5px;
+    padding: 0 5px;
+    display: flex;
+    align-items: center;
+    user-select: none;
+    transition: opacity 0.2s, transform 0.1s;
+    line-height: 1;
+}
+
+#mp-main-ready-btn:hover {
+    transform: scale(1.1);
+}
+
+#mp-main-ready-btn[style*="pointer-events: none"] {
+    opacity: 0.4;
+    transform: none;
+}
+
+/* ============================================================
+   INJECTED MESSAGES in main #chat
+   ============================================================ */
+
+#chat .mes.mp_injected {
+    opacity: 1;
+}
+
+/* ============================================================
+   INLINE READY COUNTER
+   ============================================================ */
+
+#mp-inline-status {
+    display: flex;
+    align-items: center;
+    padding: 2px 8px;
+    font-size: 0.8em;
+    opacity: 0.9;
+    white-space: nowrap;
+    color: var(--SmartThemeQuoteColor, inherit);
+    pointer-events: none;
+    user-select: none;
+}
+
+#mp-inline-text.mp-all-ready { color: #51cf66; font-weight: bold; }
+#mp-inline-text.mp-waiting   { color: #ffd43b; }
+#mp-inline-text.mp-bot       { color: #adb5bd; font-style: italic; }
