@@ -230,3 +230,19 @@
 #mp-inline-text.mp-all-ready { color: #51cf66; font-weight: bold; }
 #mp-inline-text.mp-waiting   { color: #ff6810; }
 #mp-inline-text.mp-bot       { color: #adb5bd; font-style: italic; }
+
+/* ============================================================
+   PREVIEW MESSAGES — Normal mode
+   ============================================================ */
+
+#chat .mes.mp_preview {
+    opacity: 0.55;
+    font-style: italic;
+    border-left: 3px dashed #888888;
+    pointer-events: none;
+    user-select: none;
+}
+
+#chat .mes.mp_preview .mes_text::before {
+    content: "⏳ ";
+}
