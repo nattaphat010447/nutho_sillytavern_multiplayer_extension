@@ -1,0 +1,555 @@
+/* ============================================================
+   PANEL
+   ============================================================ */
+
+#mp-panel {
+    position: fixed;
+    top: 60px;
+    right: 16px;
+    width: 230px;
+    isolation: isolate;
+    background-color: #000000;
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    z-index: 9999;
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    color: #ffffff;
+    font-size: 0.9em;
+}
+
+#mp-panel h4 {
+    margin: 0 0 8px 0;
+    text-align: center;
+    font-size: 1em;
+    color: #ffffff;
+}
+
+/* Theme button */
+#mp-theme-btn {
+    position: absolute;
+    top: 6px;
+    right: 36px;
+    width: auto !important;
+    margin-bottom: 0 !important;
+    padding: 2px 7px !important;
+    font-size: 0.85em;
+    font-weight: bold;
+    background: transparent !important;
+    border: none !important;
+    color: #ffffff;
+    opacity: 0.6;
+    line-height: 1;
+    cursor: pointer;
+}
+
+#mp-theme-btn:hover {
+    opacity: 1;
+    background: #ffffff !important;
+    color: #000000 !important;
+}
+
+/* Close button */
+#mp-close-btn {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    width: auto !important;
+    margin-bottom: 0 !important;
+    padding: 2px 7px !important;
+    font-size: 0.85em;
+    font-weight: bold;
+    background: transparent !important;
+    border: none !important;
+    color: #ffffff;
+    opacity: 0.6;
+    line-height: 1;
+}
+
+#mp-close-btn:hover {
+    opacity: 1;
+    background: #ffffff !important;
+    color: #000000 !important;
+}
+
+#mp-panel input,
+#mp-panel textarea,
+#mp-panel button {
+    width: 100%;
+    margin-bottom: 6px;
+    padding: 6px 8px;
+    box-sizing: border-box;
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+#mp-panel textarea {
+    resize: vertical;
+}
+
+#mp-panel button {
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.15s, color 0.15s;
+}
+
+#mp-panel button:hover {
+    background: #ffffff !important;
+    color: #000000 !important;
+    filter: none;
+}
+
+#mp-panel button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+#mp-panel hr {
+    border: 0;
+    border-top: 1px solid #ffffff;
+    margin: 6px 0;
+}
+
+/* ============================================================
+   ROOM CODE BOX
+   ============================================================ */
+
+#mp-room-code-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    background: #000000;
+    border: 1px solid #ffffff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    gap: 6px;
+}
+
+#mp-room-code {
+    font-family: monospace;
+    font-weight: bold;
+    letter-spacing: 2px;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #ffffff;
+}
+
+#mp-room-code-box button {
+    width: auto;
+    margin-bottom: 0;
+    padding: 3px 8px;
+    font-size: 0.8em;
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   PLAYER LIST
+   ============================================================ */
+
+#mp-players {
+    border: 1px solid #ffffff;
+    border-radius: 4px;
+    padding: 6px;
+    margin-bottom: 6px;
+    background: #000000;
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+.mp-player-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 0;
+    border-bottom: 1px solid #ffffff;
+}
+
+.mp-player-row:last-child {
+    border-bottom: none;
+}
+
+.mp-player-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    margin-right: 6px;
+    color: #ffffff;
+}
+
+.mp-status-ready  { color: #ffffff; font-weight: bold; flex-shrink: 0; }
+.mp-status-waiting { color: #666666; flex-shrink: 0; }
+
+/* Kick button */
+.mp-kick-btn {
+    width: auto !important;
+    margin-left: 4px;
+    margin-bottom: 0 !important;
+    padding: 2px 6px !important;
+    font-size: 0.75em;
+    background: transparent !important;
+    border: 1px solid #ff4444 !important;
+    color: #ff4444 !important;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.15s;
+}
+
+.mp-kick-btn:hover {
+    background: #ff4444 !important;
+    color: #000000 !important;
+}
+
+/* ============================================================
+   STATUS BAR
+   ============================================================ */
+
+#mp-status-bar {
+    font-size: 0.8em;
+    text-align: center;
+    color: #ffffff;
+    padding-top: 8px;
+    border-top: 1px solid #ffffff;
+}
+
+/* ============================================================
+   INTEGRATED READY BUTTON
+   ============================================================ */
+
+#mp-main-ready-btn {
+    cursor: pointer;
+    font-size: 1.1em;
+    margin-right: 5px;
+    padding: 0 5px;
+    display: flex;
+    align-items: center;
+    user-select: none;
+    transition: opacity 0.2s, transform 0.1s;
+    line-height: 1;
+}
+
+#mp-main-ready-btn:hover {
+    transform: scale(1.1);
+}
+
+#mp-main-ready-btn[style*="pointer-events: none"] {
+    opacity: 0.4;
+    transform: none;
+}
+
+/* ============================================================
+   INJECTED MESSAGES in main #chat
+   ============================================================ */
+
+#chat .mes.mp_injected {
+    opacity: 1;
+}
+
+/* ============================================================
+   INLINE READY COUNTER
+   ============================================================ */
+
+#mp-inline-status {
+    display: flex;
+    align-items: center;
+    padding: 2px 8px;
+    font-size: 0.8em;
+    opacity: 0.9;
+    white-space: nowrap;
+    color: var(--SmartThemeQuoteColor, inherit);
+    pointer-events: none;
+    user-select: none;
+}
+
+#mp-inline-text.mp-all-ready { color: #51cf66; font-weight: bold; }
+#mp-inline-text.mp-waiting   { color: #ff6810; }
+#mp-inline-text.mp-bot       { color: #adb5bd; font-style: italic; }
+
+/* ============================================================
+   PREVIEW MESSAGES — Normal mode
+   ============================================================ */
+
+#chat .mes.mp_preview {
+    opacity: 0.55;
+    font-style: italic;
+    border-left: 3px dashed #888888;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* ============================================================
+   THEME OVERRIDES
+   ============================================================ */
+
+/* Dark theme */
+#mp-panel.mp-theme-dark {
+    background-color: #1a1a1a;
+    border-color: #444444;
+    color: #e0e0e0;
+}
+
+#mp-panel.mp-theme-dark h4 {
+    color: #e0e0e0;
+}
+
+#mp-panel.mp-theme-dark input,
+#mp-panel.mp-theme-dark textarea,
+#mp-panel.mp-theme-dark select,
+#mp-panel.mp-theme-dark button {
+    background: #2a2a2a;
+    color: #e0e0e0;
+    border-color: #444444;
+}
+
+#mp-panel.mp-theme-dark button:hover {
+    background: #444444 !important;
+    color: #ffffff !important;
+}
+
+#mp-panel.mp-theme-dark #mp-theme-btn,
+#mp-panel.mp-theme-dark #mp-close-btn {
+    color: #e0e0e0;
+}
+
+#mp-panel.mp-theme-dark #mp-theme-btn:hover,
+#mp-panel.mp-theme-dark #mp-close-btn:hover {
+    background: #444444 !important;
+    color: #ffffff !important;
+}
+
+#mp-panel.mp-theme-dark #mp-room-code-box,
+#mp-panel.mp-theme-dark #mp-players {
+    background: #2a2a2a;
+    border-color: #444444;
+}
+
+#mp-panel.mp-theme-dark .mp-player-row {
+    border-bottom-color: #444444;
+}
+
+#mp-panel.mp-theme-dark .mp-player-name {
+    color: #e0e0e0;
+}
+
+#mp-panel.mp-theme-dark .mp-status-waiting {
+    color: #666666;
+}
+
+#mp-panel.mp-theme-dark #mp-status-bar {
+    border-top-color: #444444;
+    color: #e0e0e0;
+}
+
+#mp-panel.mp-theme-dark hr {
+    border-top-color: #444444;
+}
+
+/* Light theme */
+#mp-panel.mp-theme-light {
+    background-color: #f5f5f5;
+    border-color: #cccccc;
+    color: #333333;
+}
+
+#mp-panel.mp-theme-light h4 {
+    color: #333333;
+}
+
+#mp-panel.mp-theme-light input,
+#mp-panel.mp-theme-light textarea,
+#mp-panel.mp-theme-light select,
+#mp-panel.mp-theme-light button {
+    background: #ffffff;
+    color: #333333;
+    border-color: #cccccc;
+}
+
+#mp-panel.mp-theme-light button:hover {
+    background: #e0e0e0 !important;
+    color: #000000 !important;
+}
+
+#mp-panel.mp-theme-light #mp-theme-btn,
+#mp-panel.mp-theme-light #mp-close-btn {
+    color: #333333;
+}
+
+#mp-panel.mp-theme-light #mp-theme-btn:hover,
+#mp-panel.mp-theme-light #mp-close-btn:hover {
+    background: #e0e0e0 !important;
+    color: #000000 !important;
+}
+
+#mp-panel.mp-theme-light #mp-room-code-box,
+#mp-panel.mp-theme-light #mp-players {
+    background: #ffffff;
+    border-color: #cccccc;
+}
+
+#mp-panel.mp-theme-light .mp-player-row {
+    border-bottom-color: #cccccc;
+}
+
+#mp-panel.mp-theme-light .mp-player-name {
+    color: #333333;
+}
+
+#mp-panel.mp-theme-light .mp-status-ready {
+    color: #2b8a3e;
+}
+
+#mp-panel.mp-theme-light .mp-status-waiting {
+    color: #999999;
+}
+
+#mp-panel.mp-theme-light #mp-status-bar {
+    border-top-color: #cccccc;
+    color: #333333;
+}
+
+#mp-panel.mp-theme-light hr {
+    border-top-color: #cccccc;
+}
+
+#mp-panel.mp-theme-light #mp-room-code {
+    color: #333333;
+}
+
+/* ============================================================
+   SERVER PACK SECTION
+   ============================================================ */
+
+#mp-pack-section {
+    margin-top: 4px;
+    padding: 6px;
+    border: 1px solid #ffffff;
+    border-radius: 4px;
+    font-size: 0.85em;
+}
+
+#mp-pack-section > summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 0;
+    user-select: none;
+}
+
+#mp-pack-section > summary::-webkit-details-marker { display: none; }
+
+#mp-pack-section > summary::before {
+    content: '▸ ';
+    font-size: 0.8em;
+    margin-right: 2px;
+    flex-shrink: 0;
+}
+
+#mp-pack-section[open] > summary::before {
+    content: '▾ ';
+}
+
+#mp-pack-status {
+    font-weight: bold;
+    font-size: 0.85em;
+    margin-left: auto;
+    padding-left: 6px;
+    flex-shrink: 0;
+}
+
+#mp-pack-input {
+    font-family: monospace !important;
+    font-size: 0.75em !important;
+    margin-top: 6px;
+    word-break: break-all;
+}
+
+.mp-pack-btns {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 4px;
+}
+
+.mp-pack-btns button {
+    flex: 1;
+    margin-bottom: 0 !important;
+    font-size: 0.8em !important;
+}
+
+/* Generate sub-section */
+#mp-pack-gen {
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px dashed #666666;
+}
+
+#mp-pack-gen > summary {
+    cursor: pointer;
+    list-style: none;
+    font-size: 0.85em;
+    opacity: 0.8;
+    user-select: none;
+    padding: 2px 0;
+}
+
+#mp-pack-gen > summary::-webkit-details-marker { display: none; }
+#mp-pack-gen > summary::before { content: '▸ '; }
+#mp-pack-gen[open] > summary::before { content: '▾ '; }
+
+#mp-pack-gen input {
+    font-size: 0.8em !important;
+    margin-bottom: 4px !important;
+}
+
+.mp-gen-relay-label {
+    display: flex !important;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.78em;
+    padding: 3px 0;
+    width: auto !important;
+    border: none !important;
+    background: transparent !important;
+    margin-bottom: 4px;
+}
+
+.mp-gen-relay-label input[type="checkbox"] {
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    flex-shrink: 0;
+}
+
+#mp-gen-create-btn {
+    font-size: 0.8em !important;
+}
+
+/* ── Dark theme overrides ── */
+#mp-panel.mp-theme-dark #mp-pack-section {
+    border-color: #444444;
+}
+
+#mp-panel.mp-theme-dark #mp-pack-gen {
+    border-top-color: #555555;
+}
+
+/* ── Light theme overrides ── */
+#mp-panel.mp-theme-light #mp-pack-section {
+    border-color: #cccccc;
+}
+
+#mp-panel.mp-theme-light #mp-pack-gen {
+    border-top-color: #bbbbbb;
+}
