@@ -348,6 +348,7 @@ select.mp-input {
     text-align: center;
     width: 100%;
     box-sizing: border-box;
+    margin-top : 5px;
 }
 
 .mp-btn:active { transform: scale(0.97); }
