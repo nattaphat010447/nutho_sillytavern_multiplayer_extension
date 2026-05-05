@@ -44,6 +44,13 @@
     --mp-border:     #d4d4d8;
     --mp-text:       #18181b;
     --mp-text-muted: #71717a;
+    /* Accent/state colors need to be darker for legibility on white */
+    --mp-accent:     #6366f1;
+    --mp-accent-2:   #4f46e5;
+    --mp-ok:         #16a34a;
+    --mp-warn:       #d97706;
+    --mp-err:        #dc2626;
+    --mp-danger:     #b91c1c;
     --mp-shadow:     0 8px 32px rgba(0,0,0,0.14), 0 2px 8px rgba(0,0,0,0.08);
 }
 
@@ -548,7 +555,9 @@ select.mp-input {
 #mp-players {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
+    margin-top: 15px;
+    margin-bottom: 10px;
     max-height: 130px;
     overflow-y: auto;
     scrollbar-width: thin;
@@ -857,10 +866,27 @@ select.mp-input {
 
 .mp-toast.mp-toast-show { opacity: 1; transform: translateX(0); }
 
-.mp-toast-success { background: #1a3a2a; border-color: rgba(34,211,108,0.4); color: #6ee7b7; }
-.mp-toast-error   { background: #3b1a1a; border-color: rgba(248,113,113,0.4); color: #fca5a5; }
-.mp-toast-warning { background: #3b2e11; border-color: rgba(245,158,11,0.4);  color: #fcd34d; }
-.mp-toast-info    { background: #1e1e2e; border-color: rgba(129,140,248,0.4); color: #c4b5fd; }
+/* Toast — use CSS variables so light/dark theme both look correct */
+.mp-toast-success {
+    background: color-mix(in srgb, var(--mp-ok, #22d36c) 15%, var(--mp-bg, #18181b));
+    border-color: color-mix(in srgb, var(--mp-ok, #22d36c) 50%, transparent);
+    color: var(--mp-ok, #22d36c);
+}
+.mp-toast-error {
+    background: color-mix(in srgb, var(--mp-err, #f87171) 15%, var(--mp-bg, #18181b));
+    border-color: color-mix(in srgb, var(--mp-err, #f87171) 50%, transparent);
+    color: var(--mp-err, #f87171);
+}
+.mp-toast-warning {
+    background: color-mix(in srgb, var(--mp-warn, #f59e0b) 15%, var(--mp-bg, #18181b));
+    border-color: color-mix(in srgb, var(--mp-warn, #f59e0b) 50%, transparent);
+    color: var(--mp-warn, #f59e0b);
+}
+.mp-toast-info {
+    background: color-mix(in srgb, var(--mp-accent, #818cf8) 15%, var(--mp-bg, #18181b));
+    border-color: color-mix(in srgb, var(--mp-accent, #818cf8) 50%, transparent);
+    color: var(--mp-accent, #818cf8);
+}
 
 /* ============================================================
    INTEGRATED READY BUTTON (in ST send row)
@@ -908,7 +934,99 @@ select.mp-input {
 #chat .mes.mp_preview {
     opacity: 0.5;
     font-style: italic;
-    border-left: 3px dashed #71717a;
+    border-left: 3px dashed var(--mp-text-muted, #71717a);
     pointer-events: none;
     user-select: none;
+}
+
+/* Placeholder "..." for players who haven't typed yet */
+.mp-preview-placeholder {
+    color: var(--mp-text-muted, #a1a1aa);
+    font-style: italic;
+    letter-spacing: 2px;
+    opacity: 0.7;
+}
+
+/* ============================================================
+   ORDER CONTROL BAR (Host only — above player list)
+   ============================================================ */
+
+.mp-order-ctrl {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 0 2px;
+}
+
+.mp-order-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--mp-text-muted);
+    flex-shrink: 0;
+    margin-right: 2px;
+}
+
+.mp-order-opt {
+    flex: 1;
+    padding: 4px 6px !important;
+    font-size: 10.5px !important;
+    font-weight: 600 !important;
+    background: var(--mp-surface) !important;
+    border: 1px solid var(--mp-border) !important;
+    color: var(--mp-text-muted) !important;
+    border-radius: var(--mp-radius-sm) !important;
+    margin-top: 0 !important;
+    transition: all var(--mp-transition) !important;
+    white-space: nowrap;
+}
+
+.mp-order-opt:hover {
+    border-color: var(--mp-accent) !important;
+    color: var(--mp-accent) !important;
+}
+
+.mp-order-opt.active {
+    background: rgba(129,140,248,0.15) !important;
+    border-color: var(--mp-accent) !important;
+    color: var(--mp-accent) !important;
+}
+
+/* ============================================================
+   DRAG-TO-REORDER (Pointer Events — Manual mode only)
+   ============================================================ */
+
+/* Grip handle on each player row */
+.mp-drag-grip-row {
+    cursor: grab;
+    touch-action: none;          /* prevent page scroll while dragging on iOS/Android */
+    user-select: none;
+    color: var(--mp-text-muted);
+    opacity: 0.45;
+    font-size: 14px;
+    padding: 4px 2px;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: opacity var(--mp-transition), color var(--mp-transition);
+}
+
+.mp-drag-grip-row:hover  { opacity: 1; color: var(--mp-accent); }
+.mp-drag-grip-row:active { cursor: grabbing; }
+
+/* Row being dragged — dim original in place */
+.mp-player-row.mp-row-dragging {
+    opacity: 0.35;
+    background: var(--mp-surface2);
+}
+
+/* Drop-target indicator lines */
+.mp-player-row.mp-drag-over-top {
+    border-top: 2px solid var(--mp-accent);
+    margin-top: -2px;          /* compensate so layout doesn't jump */
+}
+
+.mp-player-row.mp-drag-over-bottom {
+    border-bottom: 2px solid var(--mp-accent);
+    margin-bottom: -2px;
 }
