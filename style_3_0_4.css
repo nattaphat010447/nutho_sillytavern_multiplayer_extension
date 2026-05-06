@@ -3,7 +3,30 @@
    Design tokens defined as CSS custom properties on #mp-panel
    ============================================================ */
 
-/* ── Design Tokens (auto / default) ── */
+/* ── Design Tokens: Global (for modal + toasts outside #mp-panel) ── */
+:root {
+    --mp-bg:         #18181b;
+    --mp-surface:    #27272a;
+    --mp-surface2:   #3f3f46;
+    --mp-border:     #3f3f46;
+    --mp-text:       #f4f4f5;
+    --mp-text-muted: #a1a1aa;
+    --mp-accent:     #818cf8;
+    --mp-accent-2:   #6366f1;
+    --mp-ok:         #22d36c;
+    --mp-warn:       #f59e0b;
+    --mp-err:        #f87171;
+    --mp-danger:     #ef4444;
+    --mp-radius:     14px;
+    --mp-radius-sm:  8px;
+    --mp-gap:        8px;
+    --mp-font:       -apple-system, "Segoe UI Variable", "Inter", "Segoe UI", sans-serif;
+    --mp-mono:       "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+    --mp-shadow:     0 8px 32px rgba(0,0,0,0.55), 0 2px 8px rgba(0,0,0,0.3);
+    --mp-transition: 0.18s ease;
+}
+
+/* ── Design Tokens (auto / default) — inherit from :root ── */
 #mp-panel {
     --mp-bg:         #18181b;
     --mp-surface:    #27272a;
@@ -189,12 +212,259 @@
 }
 
 /* ============================================================
-   ACCORDION SECTIONS
+   MODAL (Browse Public Rooms)
    ============================================================ */
 
-.mp-section {
-    border-top: 1px solid var(--mp-border);
+.mp-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* dvh adjusts when soft keyboard opens on mobile */
+    height: 100dvh;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* safe-area padding for notch / home bar */
+    padding: max(20px, env(safe-area-inset-top))
+             max(20px, env(safe-area-inset-right))
+             max(20px, env(safe-area-inset-bottom))
+             max(20px, env(safe-area-inset-left));
+    box-sizing: border-box;
+    animation: mp-modal-fade-in 0.2s ease;
+}
+
+@keyframes mp-modal-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.mp-modal-content {
+    background: var(--mp-bg, #18181b);
+    border: 1px solid var(--mp-border, #3f3f46);
+    border-radius: var(--mp-radius, 14px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+    width: 100%;
+    max-width: 420px;
+    /* dvh = true visible height, shrinks when keyboard opens */
+    max-height: 85dvh;
+    display: flex;
+    flex-direction: column;
+    animation: mp-modal-slide-in 0.25s ease;
+    color: var(--mp-text, #f4f4f5);
+    font-family: var(--mp-font, -apple-system, sans-serif);
+    overflow: hidden;
+}
+
+@keyframes mp-modal-slide-in {
+    from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── Mobile: bottom sheet style (≤ 600px) ── */
+@media (max-width: 600px) {
+    .mp-modal {
+        padding: 0;
+        align-items: flex-end;
+    }
+    .mp-modal-content {
+        max-width: 100%;
+        width: 100%;
+        max-height: 92dvh;
+        border-radius: 16px 16px 0 0;
+        animation: mp-modal-slide-up 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+    @keyframes mp-modal-slide-up {
+        from { transform: translateY(100%); opacity: 0.6; }
+        to   { transform: translateY(0);    opacity: 1; }
+    }
+    /* pull handle hint */
+    .mp-modal-header::before {
+        content: '';
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 36px;
+        height: 4px;
+        border-radius: 2px;
+        background: var(--mp-border, #3f3f46);
+    }
+    .mp-modal-header {
+        position: relative;
+        padding-top: 20px;
+    }
+}
+
+.mp-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--mp-border, #3f3f46);
     flex-shrink: 0;
+}
+
+.mp-modal-header h3 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--mp-text, #f4f4f5);
+}
+
+.mp-modal-close {
+    width: 36px;   /* touch-friendly ≥ 36px */
+    height: 36px;
+    padding: 0;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--mp-text-muted, #a1a1aa);
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.18s ease;
+    flex-shrink: 0;
+}
+
+.mp-modal-close:hover {
+    background: var(--mp-surface, #27272a);
+    border-color: var(--mp-border, #3f3f46);
+    color: var(--mp-err, #f87171);
+}
+
+.mp-modal-body {
+    padding: 16px 18px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;  /* iOS momentum scroll */
+    overscroll-behavior: contain;        /* prevent background scroll */
+    flex: 1;
+    min-height: 450px;
+}
+
+.mp-modal-footer {
+    display: flex;
+    gap: 8px;
+    padding: 12px 18px;
+    /* safe-area for iOS home bar */
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+    border-top: 1px solid var(--mp-border, #3f3f46);
+    flex-shrink: 0;
+}
+
+.mp-modal-footer .mp-btn {
+    flex: 1;
+    min-height: 44px;  /* Apple HIG touch target */
+}
+
+/* Room list */
+.mp-room-list-loading {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--mp-text-muted, #a1a1aa);
+    font-size: 13px;
+}
+
+.mp-room-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.mp-room-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--mp-text-muted, #a1a1aa);
+    font-size: 13px;
+}
+
+/* Room card */
+.mp-room-card {
+    background: var(--mp-surface, #27272a);
+    border: 1px solid var(--mp-border, #3f3f46);
+    border-radius: var(--mp-radius-sm, 8px);
+    padding: 12px;
+    transition: all 0.2s ease;
+    cursor: default;
+}
+
+.mp-room-card:hover {
+    border-color: var(--mp-accent, #818cf8);
+    box-shadow: 0 2px 12px rgba(129, 140, 248, 0.15);
+}
+
+.mp-room-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.mp-room-card-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--mp-text, #f4f4f5);
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mp-room-card-icons {
+    font-size: 13px;
+    opacity: 0.7;
+    flex-shrink: 0;
+    margin-left: 8px;
+}
+
+.mp-room-card-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--mp-text-muted, #a1a1aa);
+    margin-bottom: 10px;
+}
+
+.mp-room-join-btn {
+    width: 100%;
+    margin-top: 0 !important;
+    min-height: 44px;  /* Apple HIG touch target */
+}
+
+/* Password input in room card — 16px prevents iOS auto-zoom */
+.mp-room-pw-input {
+    font-size: 16px !important;
+    min-height: 44px;
+}
+
+.mp-room-pw-hint {
+    font-size: 11px;
+    color: var(--mp-err, #f87171);
+    min-height: 1em;
+}
+
+/* Mobile touch targets extra boost */
+@media (max-width: 600px) {
+    .mp-room-join-btn { min-height: 48px; font-size: 14px !important; }
+    .mp-room-pw-input { min-height: 48px; }
+    .mp-modal-close   { width: 44px !important; height: 44px !important; }
+    .mp-room-card     { padding: 14px; }
+    .mp-room-card-name { font-size: 15px; }
+}
+
+/* ============================================================
+   TOGGLE BUTTON (in ST extensions menu)
+   ============================================================ */
+
+#mp-toggle-btn {
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
 }
 
 .mp-section:last-of-type {
@@ -307,7 +577,7 @@
     outline: none;
     transition: border-color var(--mp-transition), box-shadow var(--mp-transition);
     resize: vertical;
-    margin: 0;
+    margin: 5px;
     display: block;
 }
 
@@ -736,6 +1006,7 @@ select.mp-input {
     display: flex;
     align-items: center;
     gap: 6px;
+    margin-left: 10px;
     font-size: 11.5px;
     color: var(--mp-text-muted);
     cursor: pointer;
