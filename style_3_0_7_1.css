@@ -916,20 +916,20 @@ select.mp-input {
 .mp-status-waiting   { font-size: 13px; color: var(--mp-text-muted); flex-shrink: 0; }
 .mp-status-spectator { font-size: 13px; color: var(--mp-accent); flex-shrink: 0; opacity: 0.85; }
 
-.mp-spectate-btn {
+.mp-status-toggle {
+    cursor: pointer;
     background: none;
     border: none;
-    cursor: pointer;
     font-size: 13px;
-    padding: 2px 4px;
+    padding: 2px 5px;
     border-radius: var(--mp-radius-sm);
-    color: var(--mp-text-muted);
-    transition: color var(--mp-transition), background var(--mp-transition);
+    color: inherit;
+    transition: background var(--mp-transition), transform 0.1s;
     flex-shrink: 0;
     line-height: 1;
 }
-.mp-spectate-btn:hover { color: var(--mp-accent); background: rgba(129,140,248,0.12); }
-.mp-spectate-btn.mp-spectating-active { color: var(--mp-accent); opacity: 1; }
+.mp-status-toggle:hover { color: var(--mp-accent); background: rgba(129,140,248,0.15); transform: scale(1.15); }
+.mp-status-toggle.mp-spectating-active { color: var(--mp-accent); opacity: 1; }
 
 /* Kick button */
 .mp-kick-btn {
