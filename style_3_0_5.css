@@ -632,10 +632,11 @@ select.mp-input {
 
 /* Primary — filled accent */
 .mp-btn-primary {
-    background: var(--mp-accent-2);
-    color: #fff;
-    border-color: var(--mp-accent-2);
+    background: rgba(129,140,248,0.15) !important;
+    border-color: var(--mp-accent) !important;
+    color: var(--mp-accent) !important;
 }
+
 .mp-btn-primary:hover { background: var(--mp-accent); border-color: var(--mp-accent); box-shadow: 0 0 0 2px rgba(129,140,248,0.25); }
 
 /* Secondary — outlined */
@@ -1174,7 +1175,11 @@ select.mp-input {
     line-height: 1;
 }
 #mp-main-ready-btn:hover { transform: scale(1.12); }
-#mp-main-ready-btn[style*="pointer-events: none"] { opacity: 0.4; transform: none; }
+#mp-main-ready-btn[style*="pointer-events: none"] {
+    opacity: 0.4;
+    transform: none;
+    margin-right: 3px;
+}
 
 /* ============================================================
    INLINE READY COUNTER
