@@ -149,8 +149,8 @@
     flex-shrink: 0;
 }
 
-/* Close / header icon buttons */
-#mp-close-btn {
+/* Minimize / header icon buttons */
+#mp-minimize-btn {
     width: 26px !important;
     height: 26px !important;
     padding: 0 !important;
@@ -162,15 +162,59 @@
     background: transparent !important;
     border: 1px solid transparent !important;
     color: var(--mp-text-muted) !important;
-    font-size: 11px !important;
+    font-size: 15px !important;
+    line-height: 1 !important;
     cursor: pointer;
     transition: background var(--mp-transition), color var(--mp-transition), border-color var(--mp-transition);
     flex-shrink: 0;
 }
-#mp-close-btn:hover {
+#mp-minimize-btn:hover {
     background: var(--mp-surface) !important;
     border-color: var(--mp-border) !important;
-    color: var(--mp-err) !important;
+    color: var(--mp-accent) !important;
+}
+
+/* ── Mini dot (status indicator visible in minimized mode) ── */
+.mp-mini-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--mp-text-muted);
+    flex-shrink: 0;
+    display: none;          /* hidden in normal mode */
+    transition: background var(--mp-transition);
+}
+.mp-mini-dot.mp-mini-ok   { background: var(--mp-ok);   box-shadow: 0 0 5px var(--mp-ok); }
+.mp-mini-dot.mp-mini-wait { background: var(--mp-warn);  box-shadow: 0 0 5px var(--mp-warn); }
+.mp-mini-dot.mp-mini-err  { background: var(--mp-err);   box-shadow: 0 0 5px var(--mp-err); }
+
+/* ── Minimized panel — show only the header pill ── */
+#mp-panel.mp-minimized {
+    max-height: none !important;
+    overflow: hidden !important;
+    width: auto !important;
+    min-width: 0 !important;
+}
+#mp-panel.mp-minimized > *:not(.mp-header) {
+    display: none !important;
+}
+#mp-panel.mp-minimized .mp-header {
+    border-bottom: none;
+    border-radius: var(--mp-radius);
+    padding: 8px 12px;
+}
+#mp-panel.mp-minimized .mp-title {
+    display: none;
+}
+#mp-panel.mp-minimized .mp-mini-dot {
+    display: block;      /* show dot only when minimized */
+}
+#mp-panel.mp-minimized .mp-logo {
+    cursor: pointer;
+    opacity: 0.85;
+}
+#mp-panel.mp-minimized .mp-logo:hover {
+    opacity: 1;
 }
 
 /* ============================================================
