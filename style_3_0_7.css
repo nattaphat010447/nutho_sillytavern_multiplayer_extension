@@ -912,8 +912,24 @@ select.mp-input {
     color: var(--mp-text);
 }
 
-.mp-status-ready  { font-size: 13px; color: var(--mp-ok); flex-shrink: 0; font-weight: 700; }
-.mp-status-waiting { font-size: 13px; color: var(--mp-text-muted); flex-shrink: 0; }
+.mp-status-ready     { font-size: 13px; color: var(--mp-ok); flex-shrink: 0; font-weight: 700; }
+.mp-status-waiting   { font-size: 13px; color: var(--mp-text-muted); flex-shrink: 0; }
+.mp-status-spectator { font-size: 13px; color: var(--mp-accent); flex-shrink: 0; opacity: 0.85; }
+
+.mp-spectate-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 2px 4px;
+    border-radius: var(--mp-radius-sm);
+    color: var(--mp-text-muted);
+    transition: color var(--mp-transition), background var(--mp-transition);
+    flex-shrink: 0;
+    line-height: 1;
+}
+.mp-spectate-btn:hover { color: var(--mp-accent); background: rgba(129,140,248,0.12); }
+.mp-spectate-btn.mp-spectating-active { color: var(--mp-accent); opacity: 1; }
 
 /* Kick button */
 .mp-kick-btn {
@@ -1240,9 +1256,10 @@ select.mp-input {
     user-select: none;
 }
 
-#mp-inline-text.mp-all-ready { color: #22d36c; font-weight: bold; }
-#mp-inline-text.mp-waiting   { color: #f59e0b; }
-#mp-inline-text.mp-bot       { color: #a1a1aa; font-style: italic; }
+#mp-inline-text.mp-all-ready  { color: #22d36c; font-weight: bold; }
+#mp-inline-text.mp-waiting    { color: #f59e0b; }
+#mp-inline-text.mp-bot        { color: #a1a1aa; font-style: italic; }
+#mp-inline-text.mp-spectating { color: var(--mp-accent, #818cf8); font-style: italic; }
 
 /* ============================================================
    INJECTED / PREVIEW MESSAGES in ST #chat
