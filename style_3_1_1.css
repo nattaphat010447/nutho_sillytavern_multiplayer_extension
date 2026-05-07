@@ -733,6 +733,14 @@ select.mp-input {
 }
 .mp-btn-danger:hover { background: rgba(239,68,68,0.12); border-color: var(--mp-err); }
 
+/* Warning — yellow */
+.mp-btn-warning {
+    background: rgba(245,158,11,0.12);
+    border-color: rgba(245,158,11,0.45);
+    color: var(--mp-warn);
+}
+.mp-btn-warning:hover { background: rgba(245,158,11,0.22); border-color: var(--mp-warn); box-shadow: 0 0 0 2px rgba(245,158,11,0.2); }
+
 /* Accent — teal/green (used for OpenRelay) */
 .mp-btn-accent {
     background: rgba(34,211,108,0.12);
