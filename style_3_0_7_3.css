@@ -85,7 +85,7 @@
     position: fixed;
     top: 60px;
     right: 16px;
-    width: 270px;
+    width: 350px;
     max-height: calc(100vh - 80px);
     overflow-y: auto;
     overflow-x: hidden;
@@ -428,12 +428,22 @@
     font-size: 13px;
 }
 
-/* Room card */
+/* Search input in Browse Rooms modal */
+.mp-room-search {
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+/* Room card — compact: info on left, Join button on right */
 .mp-room-card {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
     background: var(--mp-surface, #27272a);
     border: 1px solid var(--mp-border, #3f3f46);
     border-radius: var(--mp-radius-sm, 8px);
-    padding: 12px;
+    padding: 10px 12px;
     transition: all 0.2s ease;
     cursor: default;
 }
@@ -441,6 +451,22 @@
 .mp-room-card:hover {
     border-color: var(--mp-accent, #818cf8);
     box-shadow: 0 2px 12px rgba(129, 140, 248, 0.15);
+}
+
+.mp-room-card-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.mp-room-card .mp-room-join-btn {
+    flex-shrink: 0;
+    min-width: 72px;
+    margin-top: 0 !important;
+}
+
+.mp-room-pw-row {
+    width: 100%;
+    flex-basis: 100%;
 }
 
 .mp-room-card-header {
@@ -916,20 +942,30 @@ select.mp-input {
 .mp-status-waiting   { font-size: 13px; color: var(--mp-text-muted); flex-shrink: 0; }
 .mp-status-spectator { font-size: 13px; color: var(--mp-accent); flex-shrink: 0; opacity: 0.85; }
 
-.mp-status-toggle {
+.mp-spectate-btn {
     cursor: pointer;
-    background: none;
-    border: none;
-    font-size: 13px;
-    padding: 2px 5px;
-    border-radius: var(--mp-radius-sm);
-    color: inherit;
-    transition: background var(--mp-transition), transform 0.1s;
+    background: none !important;
+    border: none !important;
+    font-size: 13px !important;
+    padding: 2px 5px !important;
+    border-radius: var(--mp-radius-sm) !important;
+    color: var(--mp-text-muted) !important;
+    opacity: 0.55;
+    transition: color var(--mp-transition), background var(--mp-transition), opacity var(--mp-transition), transform 0.1s;
     flex-shrink: 0;
     line-height: 1;
+    width: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    font-family: var(--mp-font) !important;
 }
-.mp-status-toggle:hover { color: var(--mp-accent); background: rgba(129,140,248,0.15); transform: scale(1.15); }
-.mp-status-toggle.mp-spectating-active { color: var(--mp-accent); opacity: 1; }
+.mp-spectate-btn:hover { color: var(--mp-accent) !important; background: rgba(129,140,248,0.15) !important; opacity: 1; transform: scale(1.15); }
+.mp-spectate-btn.mp-spectating-active {
+    color: var(--mp-accent) !important;
+    background: rgba(129,140,248,0.18) !important;
+    opacity: 1;
+    box-shadow: 0 0 0 1px rgba(129,140,248,0.4);
+}
 
 /* Kick button */
 .mp-kick-btn {
@@ -1101,6 +1137,52 @@ select.mp-input {
     display: flex;
     flex-direction: column;
     gap: 3px;
+}
+
+/* ============================================================
+   SUBSECTION (Network/TURN nested inside Settings)
+   ============================================================ */
+
+.mp-subsection {
+    border: 1px solid var(--mp-border);
+    border-radius: var(--mp-radius-sm);
+    overflow: hidden;
+}
+
+.mp-subsection-summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--mp-text);
+    cursor: pointer;
+    user-select: none;
+    background: var(--mp-surface);
+    transition: background var(--mp-transition), color var(--mp-transition);
+}
+.mp-subsection-summary::-webkit-details-marker { display: none; }
+.mp-subsection-summary::after {
+    content: '▸';
+    font-size: 10px;
+    margin-left: auto;
+    color: var(--mp-text-muted);
+    transition: transform var(--mp-transition);
+    flex-shrink: 0;
+}
+.mp-subsection[open] > .mp-subsection-summary { background: var(--mp-surface2); }
+.mp-subsection[open] > .mp-subsection-summary::after { transform: rotate(90deg); }
+.mp-subsection-summary:hover { background: var(--mp-surface2); }
+
+.mp-subsection-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--mp-gap);
+    padding: 10px;
+    background: var(--mp-bg);
+    animation: mp-sec-in 0.15s ease;
 }
 
 /* ============================================================
