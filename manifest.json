@@ -1,9 +1,9 @@
 {
   "display_name": "Multiplayer SillyTavern Sync",
   "loading_order": 9,
-  "version": "3.1.7",
-  "js": "index_3_1_7.js",
-  "css": "style_3_1_7.css",
+  "version": "3.2.0",
+  "js": "index_3_2_0.js",
+  "css": "style_3_2_0.css",
   "author": "ST-MP-SYNC",
   "homePage": "",
   "requires": [],
